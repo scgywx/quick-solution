@@ -12,8 +12,6 @@ Solve problem in a word
 ## Linux
 + tcpdump或者wireshark抓包发现数据包大于mtu，是tso的作用
 
-+ php的mysqlnd扩展connect超时使用default_socket_timeout，而read则是使用mysqlnd.read_timeout【默认是1年】, 所以如果想设置mysql超时需要两个配置一起修改（注：mysqlnd.read_timeout只能改php.ini）
-
 + socket关闭时，通常不能完整发送在缓冲区的数据，如果想发送还在缓冲区的数据，需要设置LINGER。
 
 + 信号量（semaphore）、互斥（mutex）、临界区（critical section）的区别，  
@@ -52,10 +50,14 @@ Solve problem in a word
 
 + php的protobuf扩展(非官方)，使用空的结构体会报错(嵌套空结构体)，修改protobuf.c的serializeToString，让其返回空串，而不是出错。
 
-+ 34、yaf会自动将controller转换为小写，修改yaf_dispatcher.c的yaf_dispatcher_fix_default函数  
++ yaf会自动将controller转换为小写，修改yaf_dispatcher.c的yaf_dispatcher_fix_default函数  
+```
 char *q, *p = zend_str_tolower_dup(Z_STRVAL_P(controller), Z_STRLEN_P(controller));  
-改成  
+```
+改成
+```
 char *q, *p = estrndup(Z_STRVAL_P(controller), Z_STRLEN_P(controller));  
+```
 
 + 查看php当前执行的opcode  
 (gdb) p *executor_globals.current_execute_data.opline
@@ -67,6 +69,8 @@ PHP中所有以0e开头并且后续全是数字的字符串比较，一律返回
 + 在使用iconv从utf-8转到gbk时出错了，因为遇到了\c2\a0字符，这是个特殊空格，可以使用//IGNORE忽略，也可以在转换之前替换掉
 
 + redis在局域网与本机通信存在网络开销，内网延迟0.3ms(平均3条命令就1ms），本机延迟0.03ms(30条命令才1ms)，10倍差距
+
++ php的mysqlnd扩展connect超时使用default_socket_timeout，而read则是使用mysqlnd.read_timeout【默认是1年】, 所以如果想设置mysql超时需要两个配置一起修改（注：mysqlnd.read_timeout只能改php.ini）
 
 ## Golang
 + reflect的set必须要指针类型，ValueOf的时候传递指针类型
