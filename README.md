@@ -1,6 +1,14 @@
 # A Word Solution
 Solve problem in a word
 
+## Structure
+* [Linux](#linux)  
+* [PHP](#php)  
+* [Golang](#golang)  
+* [C/C++](#cc)  
+* [Redis](#redis)  
+* [Misc](#misc)  
+
 ## Linux
 + tcpdump或者wireshark抓包发现数据包大于mtu，是tso的作用
 
