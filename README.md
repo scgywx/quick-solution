@@ -1,4 +1,4 @@
-# A Word Solution
+# Introduction
 Solve problem in a word
 
 ## Structure
