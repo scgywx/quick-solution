@@ -32,7 +32,9 @@ Solve problem in a word
 + openssl命令行的key和iv需要密钥的16进制，程序中使用字符串即可
 
 ## PHP
-+ PHP DES算法需要添加padding，否则其它语言解不出来，反解不需要unpadding.
++ PHP AES/DES算法需要添加padding，否则其它语言解不出来，
+
++ AES/DES算法如果加密数据末尾带0x00，解密后可能不知道真正原数据末尾多少0x00，可以在加密之前在最末尾添加加一个非0占位符，解密完后将末尾的0x00全部去掉，再去掉一个占位符。
 
 + PHP进程出现卡住，如果cpu持续偏高，说明死循环，检查while的使用和for的变量复用。
 
